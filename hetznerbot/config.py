@@ -26,12 +26,13 @@ default_config = {
     },
 }
 
-config_path = os.path.expanduser("~/.config/hetznerbot.toml")
+#config_path = os.path.expanduser("~/.config/hetznerbot.toml")
+config_path = os.getenv('CONFIG_FILE')
 
 if not os.path.exists(config_path):
     with open(config_path, "w") as file_descriptor:
         toml.dump(default_config, file_descriptor)
-    print("Please adjust the configuration file at '~/.config/hetznerbot.toml'")
+    print("Please adjust the configuration file at '{}'".format(config_path))
     sys.exit(1)
 else:
     config = toml.load(config_path)
